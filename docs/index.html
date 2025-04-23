@@ -266,6 +266,17 @@
       border-top: 1px solid var(--border-color);
       transition: background-color 0.3s, border-color 0.3s;
     }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 
@@ -281,13 +292,13 @@
     </nav>
     <button id="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
   </header>
-  <section class="hero" id="sobre">
+  <section class="hero fade-in" id="sobre">
     <h1 style="padding: 0; margin: 0;">Aula Introdutória de </h1>
     <h1> <span style="padding: 0; margin: 0;" class="typing">Git & GitHub</span></h1>
     <p>Aprenda desde os conceitos básicos de versionamento de código com Git até a colaboração usando GitHub.</p>
     <a href="#comandos" class="btn-primary">Ver Comandos</a>
   </section>
-  <section class="features" id="comandos">
+  <section class="features fade-in" id="comandos">
     <div class="feature-card">
       <h3>git init</h3>
       <p>Como iniciar um repositório local do zero.</p>
@@ -399,6 +410,22 @@ Clique em "Save"
       });
     });
     document.querySelector('.step-btn[data-step="1"]').click();
+
+    // Seleciona todos os elementos que devem ter o efeito de transição
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    // Configura o Intersection Observer
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Para de observar após a animação
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Observa cada elemento
+    fadeElements.forEach(el => observer.observe(el));
   </script>
 </body>
 
