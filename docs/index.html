@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aula Git & GitHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f6f8fa;
+      --text-color: #24292e;
+      --header-bg: #24292e;
+      --card-bg: #ffffff;
+      --border-color: #e1e4e8;
+      --button-bg: rgba(255, 255, 255, 0.1);
+    }
+    body.dark {
+      --bg-color: #0d1117;
+      --text-color: #c9d1d9;
+      --header-bg: #161b22;
+      --card-bg: #0d1117;
+      --border-color: #30363d;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+    .logo {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-links a {
+      color: #c9d1d9;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+    #theme-toggle {
+      background: var(--button-bg);
+      border: none;
+      color: #c9d1d9;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+    #theme-toggle:hover {
+      background: var(--button-bg);
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      white-space: nowrap;
+    }
+    .typing {
+      display: inline-block;
+      overflow: hidden;
+      border-right: .15em solid currentColor;
+      white-space: nowrap;
+      animation: typing 2s steps(14, end), blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; } 
+      to { width: 14ch; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: currentColor; }
+    }
+    .hero p {
+      font-size: 1.125rem;
+      color: #57606a;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      transition: color 0.3s;
+    }
+    .btn-primary {
+      background-color: #2ea44f;
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #2c974b;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .feature-card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      width: 280px;
+      box-shadow: 0 1px 3px rgba(27,31,35,0.12);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .feature-card h3 {
+      margin-top: 0;
+      color: #0366d6;
+    }
+    .feature-card ul {
+      padding-left: 1rem;
+    }
+    .terminal-section {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      padding: 1rem;
+      margin: 2rem;
+      border-radius: 6px;
+      font-family: monospace;
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .terminal-section h2 {
+      margin-top: 0;
+      color: #58a6ff;
+    }
+    .pages-section {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .pages-section h2 {
+      color: #0366d6;
+      font-size: 1.75rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .pages-section p {
+      text-align: center;
+      color: #57606a;
+      margin-bottom: 1.5rem;
+    }
+    .steps-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .step-btn {
+      background-color: #eff3f6;
+      border: 1px solid #d1d5da;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .step-btn.active {
+      background-color: #2ea44f;
+      color: #ffffff;
+      border-color: #2ea44f;
+    }
+    .step-btn.demo {
+      background-color: #0366d6;
+      color: #ffffff;
+      border-color: #0366d6;
+    }
+    .steps-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .step-content {
+      display: none;
+      margin-bottom: 1rem;
+    }
+    .step-content pre {
+      background-color: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .step-content iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 6px;
+      border: 1px solid #e1e4e8;
+    }
+    footer {
+      background-color: var(--bg-color);
+      text-align: center;
+      padding: 1.5rem;
+      color: #57606a;
+      border-top: 1px solid var(--border-color);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="logo">Git & GitHub</a>
+    <nav class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#comandos">Comandos</a>
+      <a href="#terminal">Terminal</a>
+      <a href="#pages">Pages</a>
+      <a href="#dicas">Dicas</a>
+    </nav>
+    <button id="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+  </header>
+  <section class="hero" id="sobre">
+    <h1>Aula Introdutória de </h1> <br>
+    <h1> <span class="typing">Git & GitHub</span></h1>
+    <p>Aprenda desde os conceitos básicos de versionamento de código com Git até a colaboração usando GitHub.</p>
+    <a href="#comandos" class="btn-primary">Ver Comandos</a>
+  </section>
+  <section class="features" id="comandos">
+    <div class="feature-card">
+      <h3>git init</h3>
+      <p>Como iniciar um repositório local do zero.</p>
+    </div>
+    <div class="feature-card">
+      <h3>git add &amp; commit</h3>
+      <p>Marcar e salvar alterações de forma organizada.</p>
+    </div>
+    <div class="feature-card">
+      <h3>git push &amp; pull</h3>
+      <p>Enviar e atualizar código no GitHub.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Branches</h3>
+      <p>Trabalhar com ramificações para novas features.</p>
+    </div>
+  </section>
+  <section class="terminal-section" id="terminal">
+    <h2>Exemplo no Terminal</h2>
+    <pre><code>
+$ git init
+Initialized empty Git repository in /caminho/para/repositorio/.git/
+
+$ git add .
+# adiciona todos os arquivos ao stage
+
+$ git commit -m "Primeiro commit"
+[main (root-commit) abc1234] Primeiro commit
+ 2 files changed, 10 insertions(+)
+ create mode 100644 index.html
+
+$ git push -u origin main
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 1.02 KiB | 524.00 KiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0)
+To https://github.com/usuario/aula-git-github.git
+ * [new branch]      main -> main
+    </code></pre>
+  </section>
+  <section class="pages-section" id="pages">
+    <h2>🔗 Live Preview com GitHub Pages</h2>
+    <p>Publice sua landing page diretamente do repositório com alguns passos simples.</p>
+    <div class="steps-nav">
+      <button class="step-btn" data-step="1">Passo 1</button>
+      <button class="step-btn" data-step="2">Passo 2</button>
+      <button class="step-btn" data-step="3">Passo 3</button>
+      <button class="step-btn demo" data-step="demo">Ver Demo</button>
+    </div>
+    <div class="steps-content">
+      <div class="step-content" data-step="1">
+        <pre><code>
+# No terminal, crie a branch gh-pages
+git checkout -b gh-pages
+git push -u origin gh-pages
+        </code></pre>
+      </div>
+      <div class="step-content" data-step="2">
+        <pre><code>
+# No GitHub: Vá em Settings > Pages
+# Selecione branch: gh-pages / pasta: /
+Clique em "Save"
+        </code></pre>
+      </div>
+      <div class="step-content" data-step="3">
+        <pre><code>
+# Após alguns segundos, acesse:
+# https://<seu-usuario>.github.io/aula-git-github/
+        </code></pre>
+      </div>
+      <div class="step-content" data-step="demo">
+        <iframe src="https://<seu-usuario>.github.io/aula-git-github/" title="Demo GitHub Pages"></iframe>
+      </div>
+    </div>
+  </section>
+  <section class="features" id="dicas">
+    <div class="feature-card">
+      <h3>Dicas e Boas Práticas</h3>
+      <ul>
+        <li>Commits claros e frequentes</li>
+        <li>Uso de .gitignore</li>
+        <li>Pull Requests para revisar código</li>
+        <li>Documente no README</li>
+      </ul>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Aula Git &amp; GitHub • Desenvolvido para iniciantes
+  </footer>
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+    // Steps interactivity
+    const buttons = document.querySelectorAll('.step-btn');
+    const contents = document.querySelectorAll('.step-content');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const step = btn.getAttribute('data-step');
+        contents.forEach(c => {
+          c.style.display = c.getAttribute('data-step') === step ? 'block' : 'none';
+        });
+      });
+    });
+    document.querySelector('.step-btn[data-step="1"]').click();
+  </script>
+</body>
+</html>
